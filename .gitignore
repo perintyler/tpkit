@@ -1,1 +1,9 @@
 private_commands.sh
+__pycache__/
+*.pyc
+.pytest_cache/
+imessage_playlist.egg-info/
+*.egg
+build/
+dist/
+env/
