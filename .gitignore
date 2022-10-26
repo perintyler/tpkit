@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 imessage_playlist.egg-info/
 *.egg
+*.egg-info
 build/
 dist/
 env/
