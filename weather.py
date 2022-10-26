@@ -77,3 +77,15 @@ def get_current_geocoordinate() -> Tuple[float]: # (lattidude, longitude)
 
   return float(lattitude), float(longitude)
 
+def get_current_weather() -> Weather:
+  """
+  Weather data is obtained via the Open Meteo API.
+  """
+  lattitude, longitude = get_current_geocoordinate()
+  api_query = f'latitude={lattitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit'
+  request = requests.get(f'{API_ENDPOINT}?{api_query}')
+  if request.status_code != requests.codes.ok:
+    raise ConnectionError(f'weather API request failed with status code {request.status_code}')
+  current_weather_json_object = request.json()['current_weather']
+  return Weather(**current_weather_json_object)
+
