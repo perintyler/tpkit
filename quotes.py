@@ -28,3 +28,5 @@ def fetch_quotes():
 def get_random_quote():
   return random.choice(fetch_quotes())
 
+if __name__ == '__main__':
+  print(get_random_quote())
