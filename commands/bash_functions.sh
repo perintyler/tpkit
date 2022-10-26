@@ -11,7 +11,7 @@ function clear_scrollback()
     printf '\33c\e[3J'; # https://stackoverflow.com/questions/2198377/how-can-i-clear-previous-output-in-terminal-in-mac-os-x
 }
 
-function clearall() 
+function clear_all() 
 {
   clear;
   clear_scrollback;
@@ -35,3 +35,7 @@ function google()
     chrome $SEARCH_RESULTS_URL;
 }
 
+function print_random_quote()
+{
+    python3 -m tpkit.quotes;
+}
