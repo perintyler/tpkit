@@ -39,3 +39,8 @@ function print_random_quote()
 {
     python3 -m tpkit.quotes;
 }
+
+function print_random_quote()
+{
+    python3 -m tpkit.quotes;
+}
