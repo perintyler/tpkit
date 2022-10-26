@@ -7,6 +7,7 @@ This module generates random quotes.
 
 from dataclasses import dataclass
 import requests 
+import random
 
 QUOTE_API_URL = 'https://type.fit/api/quotes'
 
@@ -23,3 +24,7 @@ def fetch_quotes():
   if request.status_code != requests.codes.ok:
     raise ConnectionError(f'quote API request failed with status code {request.status_code}')
   return [Quote(**json_object) for json_object in request.json()]
+
+def get_random_quote():
+  return random.choice(fetch_quotes())
+
