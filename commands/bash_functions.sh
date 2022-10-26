@@ -1,7 +1,10 @@
 # tpkit/commands.sh
 
 PREFERRED_TEXT_EDITOR_FOR_CODING="sublime text" # application name
+
 PATH_TO_WEB_BROWSER_APPLICATION="/Applications/Google Chrome.app"
+
+WORK_DIRECTORY="~/garage"
 
 function clear_scrollback()
 {
@@ -31,3 +34,4 @@ function google()
     SEARCH_RESULTS_URL=http://google.com/search?q=$QUERY;
     chrome $SEARCH_RESULTS_URL;
 }
+
