@@ -89,3 +89,5 @@ def get_current_weather() -> Weather:
   current_weather_json_object = request.json()['current_weather']
   return Weather(**current_weather_json_object)
 
+if __name__ == '__main__':
+  print(get_current_weather())
