@@ -44,3 +44,22 @@ function print_random_quote()
 {
     python3 -m tpkit.quotes;
 }
+
+function start_work() 
+{
+  cd $WORK_DIRECTORY;
+  clear_all;
+  echo Hello, $MY_NAME.
+  echo;
+  echo;
+  print_weather; 
+  echo;
+  echo;
+  print_random_quote;
+  echo;
+  echo;
+  echo "Good Luck :)";
+  echo;
+  echo;
+  subl .;
+}
