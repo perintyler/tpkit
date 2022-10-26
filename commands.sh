@@ -24,3 +24,10 @@ function chrome()
     /usr/bin/open -a $PATH_TO_WEB_BROWSER_APPLICATION $1;
 }
 
+function google() 
+{
+    KEY_WORDS="$@";
+    QUERY=${KEY_WORDS// /"+"};
+    SEARCH_RESULTS_URL=http://google.com/search?q=$QUERY;
+    chrome $SEARCH_RESULTS_URL;
+}
