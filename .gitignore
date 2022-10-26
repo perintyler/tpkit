@@ -1,4 +1,4 @@
-private_commands.sh
+private_bash_functions.sh
 __pycache__/
 *.pyc
 .pytest_cache/
