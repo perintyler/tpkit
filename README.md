@@ -23,3 +23,19 @@ The `google` command allows for quick googling while coding. It will open up a w
 ```bash
 google how do I install python3
 ```
+
+### Texting
+
+```bash
+text 2024561111 "hey, this is a text message send from my command line"
+```
+
+To make this easier to use, add functions to `commands/bash_functions.sh` to text individual people. Something like this:
+
+```bash
+function text_cornelius()
+{
+  message = "@";
+  text 2129631234 $message;
+}
+
