@@ -39,3 +39,26 @@ function text_cornelius()
   text 2129631234 $message;
 }
 
+```
+
+### Start Work
+
+The `start_work` command will navigate to the current project directory (define in `bash_commands.sh` -- TODO: create a config file), clear the terminal window and its scrollback, print the weather of the current location (which is determined using IP address information), then prints out a random quote. It looks something look this:
+
+```bash
+Hello, Tyler.
+
+
+It is currently 63.7 degrees with a windspeed of 10.0. Expect partly cloudy skies and overcast.
+
+
+It is better to understand a little than to misunderstand a lot.
+  - Anatole France
+
+
+Good Luck :)
+
+
+tylerperin@Tylers-MBP tpkit % 
+```
+
