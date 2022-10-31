@@ -1,5 +1,7 @@
 # tpkit
 
+`tpkit` is a python package for defining fun or useful commands that can be called from a terminal prompt. 
+
 ## Installation
 
 From within the tpkit repo root directory, install the package and its dependecies with `pip`.
