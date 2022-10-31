@@ -1,5 +1,7 @@
  #!/bin/sh 
 
+MY_NAME="Tyler"
+
 PREFERRED_TEXT_EDITOR_FOR_CODING="sublime text" # application name
 
 PATH_TO_WEB_BROWSER_APPLICATION="/Applications/Google Chrome.app"
@@ -35,9 +37,9 @@ function google()
   chrome $SEARCH_RESULTS_URL;
 }
 
-function print_random_quote()
+function print_weather()
 {
-  python3 -m tpkit.quotes;
+  python3 -m tpkit.weather;
 }
 
 function print_random_quote()
@@ -61,5 +63,4 @@ function start_work()
   echo "Good Luck :)";
   echo;
   echo;
-  subl .;
 }
