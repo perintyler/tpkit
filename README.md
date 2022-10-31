@@ -16,6 +16,9 @@ Then, run the `source_bash_functions.py` script, which will source `commands/bas
 python3 ./scripts/source_bash_functions.py
 ```
 
+__NOTE:__ as of now, this script will only work for OSX users.
+__TODO:__ improve the script so it works for all operating systems.
+
 ## System Commands
 
 ### Googling
