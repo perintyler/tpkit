@@ -28,3 +28,10 @@ def test_get_current_geocordinates():
   assert type(lattitude) is float
   assert -180 <= lattitude <= 180
 
+def test_get_current_weather():
+  weather = tpkit.get_current_weather()
+  assert weather.temperature and type(weather.temperature) is float
+  assert weather.windspeed and type(weather.windspeed) is float
+  assert weather.winddirection and type(weather.winddirection) is float
+  assert weather.weathercode and type(weather.weathercode) is int
+  assert weather.time and type(weather.time) is str
