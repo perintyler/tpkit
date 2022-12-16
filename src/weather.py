@@ -6,11 +6,10 @@ This module can be used to get weather data from the Open Meteo API,
 """
 
 from dataclasses import dataclass
-from typing import Tuple
-import subprocess
-import json
 
 import requests
+
+from .location import get_current_geocoordinate
 
 API_ENDPOINT = 'https://api.open-meteo.com/v1/forecast'
 
@@ -52,7 +51,7 @@ class Weather:
   """
   temperature: float # farenheit
   windspeed: float
-  winddirection: int
+  winddirection: float
   weathercode: int
   time: str
 
@@ -61,21 +60,6 @@ class Weather:
     if self.weathercode in WEATHER_INTERPRETATION_CODES:
       weather_description += f'Expect {WEATHER_INTERPRETATION_CODES[self.weathercode]}.'
     return weather_description
-
-def get_current_geocoordinate() -> Tuple[float]: # (lattidude, longitude)
-  """
-  returns the lattitude and longitude of the current IP address
-  """
-  ip_command = subprocess.run(
-    ['curl', 'ipinfo.io'],
-    capture_output=True,
-  )
-
-  ip_info = json.loads(ip_command.stdout)
-  current_coordinate = ip_info['loc']
-  lattitude, longitude = current_coordinate.split(',')
-
-  return float(lattitude), float(longitude)
 
 def get_current_weather() -> Weather:
   """
