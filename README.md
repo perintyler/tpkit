@@ -1,6 +1,6 @@
 # tpkit
 
-`tpkit` is a python package for defining fun or useful commands that can be called from a terminal prompt. 
+`tpkit` is a python package for defining fun or useful commands that can be called from a terminal prompt, such as a `google` command. It also includes utility functions that I've found myself frequently needing, which are useful for scripting.
 
 ## Installation
 
@@ -18,6 +18,14 @@ python3 ./scripts/source_bash_functions.py
 
 __NOTE:__ as of now, this script will only work for OSX users.
 __TODO:__ improve the script so it works for all operating systems.
+
+## Testing
+
+`tpkit` uses the `pytest` unit-testing framework. All tests can be found in `tests.py`, which is located in the root directory of this repository. To run the unit tests:
+
+```bash
+pytest tests.py
+```
 
 ## System Commands
 
