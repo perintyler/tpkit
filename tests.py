@@ -35,3 +35,8 @@ def test_get_current_weather():
   assert weather.winddirection and type(weather.winddirection) is float
   assert weather.weathercode and type(weather.weathercode) is int
   assert weather.time and type(weather.time) is str
+
+def test_map_function():
+  multiples_of_2 = tpkit.map(lambda x: 2*x, [1,2,3])
+  assert type(multiples_of_2) is list
+  assert multiples_of_2 == [2,4,6]
