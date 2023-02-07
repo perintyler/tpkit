@@ -64,3 +64,9 @@ function start_work()
   echo;
   echo;
 }
+
+function clear_pip()
+{
+    python3 -m pip freeze | xargs python3 -m pip uninstall -y;
+}
+
