@@ -8,6 +8,8 @@ PATH_TO_WEB_BROWSER_APPLICATION="/Applications/Google Chrome.app"
 
 WORK_DIRECTORY="~/garage"
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 function clear_scrollback()
 {
   printf '\33c\e[3J'; # https://stackoverflow.com/questions/2198377/how-can-i-clear-previous-output-in-terminal-in-mac-os-x
@@ -67,6 +69,31 @@ function start_work()
 
 function clear_pip()
 {
-    python3 -m pip freeze | xargs python3 -m pip uninstall -y;
+  python3 -m pip freeze | xargs python3 -m pip uninstall -y;
 }
 
+function activatevenv() 
+{
+  . env/bin/activate;
+}
+
+function avenv()
+{
+  activatevenv;
+}
+
+function newbashscript()
+{
+  touch $1
+  sudo chmod 755 "$1"
+}
+
+# interactive git rebase
+function irebase()
+{
+  if [ -z "$1" ]; then
+    echo "the 'irebase' command requires an positional argument indicating how many commits to rebase";
+  else
+    git rebase -i HEAD~$1;
+  fi
+}
