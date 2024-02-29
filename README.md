@@ -16,6 +16,12 @@ Then, run the `source_bash_functions.py` script, which will source `commands/bas
 python3 ./scripts/source_bash_functions.py
 ```
 
+Or, use the convenience script, which installs the package and sources the bash functions for you. (Make sure python3 is installed before running this script).
+
+```bash
+bash setup.sh
+```
+
 __NOTE:__ as of now, this script will only work for OSX users.
 __TODO:__ improve the script so it works for all operating systems.
 
