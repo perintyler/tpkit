@@ -103,3 +103,10 @@ function findpath()
   find . -type f -name $1
 }
 
+function silent_pushd() {
+  pushd "$@" > /dev/null
+}
+
+function silent_popd() {
+  popd "$@" > /dev/null
+}
