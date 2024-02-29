@@ -97,3 +97,9 @@ function irebase()
     git rebase -i HEAD~$1;
   fi
 }
+
+function findpath()
+{
+  find . -type f -name $1
+}
+
