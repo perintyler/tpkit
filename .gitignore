@@ -8,3 +8,5 @@ imessage_playlist.egg-info/
 build/
 dist/
 env/
+.DS_Store
+config.env
