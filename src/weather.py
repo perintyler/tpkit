@@ -5,7 +5,7 @@
 This module can be used to get weather data from the Open Meteo API,
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
 import requests
 
@@ -71,7 +71,13 @@ def get_current_weather() -> Weather:
   if request.status_code != requests.codes.ok:
     raise ConnectionError(f'weather API request failed with status code {request.status_code}')
   current_weather_json_object = request.json()['current_weather']
-  return Weather(**current_weather_json_object)
+  return Weather(
+    temperature=current_weather_json_object['temperature'],
+    windspeed=current_weather_json_object['windspeed'],
+    winddirection=current_weather_json_object['winddirection'],
+    weathercode=current_weather_json_object['weathercode'],
+    time=current_weather_json_object['time']
+  )
 
 if __name__ == '__main__':
   print(get_current_weather())
