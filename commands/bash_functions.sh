@@ -1,14 +1,6 @@
  #!/bin/sh 
 
-MY_NAME="Tyler"
-
-PREFERRED_TEXT_EDITOR_FOR_CODING="sublime text" # application name
-
-PATH_TO_WEB_BROWSER_APPLICATION="/Applications/Google Chrome.app"
-
-WORK_DIRECTORY="~/garage"
-
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+BASH_FUNCTIONS_FILEPATH="$TPKIT_PATH"/commands/bash_functions.sh # path to this file
 
 function clear_scrollback()
 {
@@ -26,7 +18,7 @@ function lets_code()
   open -a $PREFERRED_TEXT_EDITOR_FOR_CODING $1;
 }
 
-function chrome()
+function browse()
 {
   /usr/bin/open -a $PATH_TO_WEB_BROWSER_APPLICATION $1;
 }
@@ -36,17 +28,24 @@ function google()
   KEY_WORDS="$@";
   QUERY=${KEY_WORDS// /"+"};
   SEARCH_RESULTS_URL=http://google.com/search?q=$QUERY;
-  chrome $SEARCH_RESULTS_URL;
+  browse $SEARCH_RESULTS_URL;
 }
 
-function print_weather()
+function tpkit_python()
 {
-  python3 -m tpkit.weather;
+  silently . $TPKIT_PATH/$TPKIT_PYTHON_VENV_DIRECTORY/bin/activate
+  $TPKIT_PYTHON "$@"
+  silently deactivate
 }
 
-function print_random_quote()
+function weather()
 {
-  python3 -m tpkit.quotes;
+  tpkit_python -m tpkit.weather
+}
+
+function quote()
+{
+  tpkit_python -m tpkit.quotes
 }
 
 function start_work() 
@@ -67,19 +66,75 @@ function start_work()
   echo;
 }
 
+function silently() {
+  $@ > /dev/null
+}
+
+function tpkit() 
+{
+  if [ -z "$1" ]; then
+    cd $TPKIT_PATH
+  elif [ "$1" = "help" ]; then
+    cat $BASH_FUNCTIONS_FILEPATH
+  elif [ "$1" = "new" ]; then
+    lets_code $BASH_FUNCTIONS_FILEPATH
+  else
+    echo "Error: unknown tpkit command $1"
+  fi
+}
+
+function setupkit() 
+{
+  bash $TPKIT_PATH/setup.sh
+  source $BASH_PROFILE
+}
+
+function makecommand() 
+{
+  subl $BASH_FUNCTIONS_FILEPATH
+}
+
+function putTextInClipboard() 
+{
+  echo $@ | pbcopy
+}
+
+function clip() 
+{
+  putTextInClipboard "$@"
+}
+
 function clear_pip()
 {
   python3 -m pip freeze | xargs python3 -m pip uninstall -y;
 }
 
-function activatevenv() 
+function pyactivate() 
 {
-  . env/bin/activate;
+  . $TPKIT_PYTHON_VENV_DIRECTORY/bin/activate
 }
 
-function avenv()
+function silent_pyactivate() 
 {
-  activatevenv;
+  silently pyactivate
+}
+
+function silent_pydeactivate() 
+{
+  deactivate > /dev/null
+}
+
+function vpython()
+{
+  silent_pyactivate
+  $TPKIT_PYTHON "$@"
+  silent_pydeactivate
+}
+
+function pykit() {
+  silent_pushd $TPKIT_PATH
+  vpython "$@"
+  silent_popd
 }
 
 function newbashscript()
@@ -92,21 +147,54 @@ function newbashscript()
 function irebase()
 {
   if [ -z "$1" ]; then
-    echo "the 'irebase' command requires an positional argument indicating how many commits to rebase";
+    echo "the 'irebase' command requires an positional argument indicating how many commits to rebase"
   else
-    git rebase -i HEAD~$1;
+    git rebase -i HEAD~$1
   fi
+}
+
+function stderr() { 
+  printf "%s\n" "$*" >&2
 }
 
 function findpath()
 {
-  find . -type f -name $1
+  args="$@";
+  find . -type f -name $args;
+}
+
+# stdouts 1 if file exists, 0 if not
+function file_exists() 
+{
+  if [ -z "$1" ]; then
+    stderr "Error: provide file path (e.g. 'file_exists ./myfile.ext'"
+  elif test -f $env_file; then
+    echo 1
+  else
+    echo 0
+  fi
 }
 
 function silent_pushd() {
   pushd "$@" > /dev/null
 }
 
+function spushd() 
+{ 
+  silent_pushd "$@" 
+}
+
 function silent_popd() {
   popd "$@" > /dev/null
 }
+
+
+function spopd() 
+{ 
+  silent_popd "$@" 
+}
+
+function home() {
+  cd ~
+}
+
